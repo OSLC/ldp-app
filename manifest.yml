@@ -1,5 +1,5 @@
 applications:
-- disk_quota: 4096M
+- disk_quota: 1024M
   host: ldp-app
   name: ldp-app
   command: node app.js
