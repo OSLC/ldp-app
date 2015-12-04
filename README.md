@@ -7,6 +7,11 @@ A simple Node.js Express app that uses the ldp-service Express middleware to cre
 
 ldp-app uses the ldp-service Express middleware module which supports LDP basic and direct containers. Indirect containers and non-RDF source are not implemented.
 
+Many thanks to Steve Speicher and Sam Padgett for their valuable contribution to LDP and this sample app.
+
+Module planning, maintenance and issues can be see at at the [ldp-app](https://hub.jazz.net/project/jamsden/ldp-app/overview) IBM Bluemix DevOps Services project.
+
+
 ## Running
 
 First, install [Node.js](http://nodejs.org). Next, install and start
