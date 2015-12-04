@@ -1,0 +1,21 @@
+{
+	"name": "LDP.js",
+	"version": "0.0.1",
+	"description": "A Node.js reference app using ldp-server",
+	"license": "Apache-2.0",
+	"author": "Sam Padgett",
+	"contributors": "Jim Amsden <jamsden@us.ibm.com>",
+	"dependencies": {
+		"express": "~4.13.3",
+		"ldp-service": "~0.0.1"
+	},
+	"engines": {
+		"node": "~5.1.0"
+
+	},
+	"scripts": {  
+	   "start": "node app.js"
+	},
+	"repository": {}
+
+}
