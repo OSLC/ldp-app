@@ -1,12 +1,12 @@
 {
 	"name": "ldp-app",
 	"version": "0.0.4",
-	"description": "A Node.js reference app using ldp-server",
+	"description": "A Node.js example app using ldp-service",
 	"license": "Apache-2.0",
 	"author": "Sam Padgett",
 	"contributors": "Jim Amsden <jamsden@us.ibm.com>",
 	"dependencies": {
-		"express": "~4.13.4",
+		"express": "~4.16.3",
 		"ldp-service": "~0.0.3"
 	},
 	"engines": {
@@ -16,6 +16,9 @@
 	"scripts": {  
 	   "start": "node app.js"
 	},
-	"repository": {}
+	"repository": {
+		"type": "git",
+    	"url": "https://github.com/OSLC/ldp-app.git"
+	}
 
 }
