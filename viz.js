@@ -24,7 +24,6 @@ module.exports = function(app, db, env) {
 	var ldp = require('./vocab/ldp.js');
 
 	app.get('/v', function(req, res, next) {
-		console.log('GET ' + req.path);
 
 		db.graphs.find({
 		    deleted: {
@@ -99,7 +98,6 @@ module.exports = function(app, db, env) {
 						jsonRes.nodes[nodes[subName]].group = types[t.object];
 						if (t.object === ldp.Container) {
 							jsonRes.nodes[nodes[subName]].img = 'folder.png';
-							console.log("Found a container " + subName);
 						}
 					}
 				});

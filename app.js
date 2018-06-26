@@ -19,31 +19,31 @@
  * accessing LDP resouces and displaying a graph of their links
  */
 
-var express = require('express');
-var ldpService = require('ldp-service');
-var env = require('./env.js');
-var viz = require('./viz.js');
+var express = require('express')
+var ldpService = require('ldp-service')
+var env = require('./env.js')
+var viz = require('./viz.js')
 
-console.log("configuration:");
+console.log("configuration:")
 console.dir(env);
 
 // setup LDP middleware
-var app = express();
-app.use(express.static(__dirname + '/public'));
+var app = express()
+app.use(express.static(__dirname + '/public'))
 
 // initialize database and set up LDP services and viz when ready
-app.use(ldpService(env));
+app.use(ldpService(env))
 
 // add the visualization middleware to support graph visualization
-viz(app, ldpService.db, env);
+viz(app, ldpService.db, env)
 
 
 // error handling (developer centric)
 app.use(function(err, req, res, next){
-	console.error(err.stack);
-	res.send(500, 'Something broke!');
-});
+	console.error(err.stack)
+	res.send(500, 'Something broke!')
+})
 
 // Start server
-app.listen(env.listenPort, env.listenHost);
-console.log('App started on port ' + env.listenPort);
+app.listen(env.listenPort, env.listenHost)
+console.log('App started on port ' + env.listenPort)

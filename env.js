@@ -90,6 +90,7 @@ if (process.env.LDP_BASE) {
 }
 
 // MongoDB
+//exports.storageImpl = 'ldp-service-mongodb' // the storage implementation to load
 if (process.env.VCAP_SERVICES) {
 	var env = JSON.parse(process.env.VCAP_SERVICES);
 	exports.mongoURL = env['mongodb-2.4'][0].credentials.url;
@@ -98,5 +99,12 @@ if (process.env.VCAP_SERVICES) {
 		exports.mongoURL = process.env.OPENSHIFT_MONGODB_DB_URL;
 	} else {
 		exports.mongoURL = process.env.MONGO_URL || config.mongoURL;
+		exports.dbName = config.dbName
 	}
 }
+
+// Jena
+exports.storageImpl = 'ldp-service-jena'
+exports.jenaURL = config.jenaURL
+exports.dbName = 'mrm'
+
