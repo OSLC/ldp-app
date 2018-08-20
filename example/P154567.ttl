@@ -1,0 +1,10 @@
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix course:  <http://localhost:3000/umaine/courses/> .
+@prefix univ:  <http://university.org/ns/edu#> .
+
+# P154567
+
+<>
+	a univ:Teacher ;
+	univ:salary 65000 ;
+	univ:teaches course:CS101, course:ME201 .

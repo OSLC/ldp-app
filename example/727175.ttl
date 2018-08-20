@@ -1,0 +1,10 @@
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix course:  <http://localhost:3000/umaine/courses/> .
+@prefix univ:  <http://university.org/ns/edu#> .
+
+<>
+	a univ:Student ; 
+	univ:name "Fred Johnson" ;
+	univ:age  33 .
+#	univ:takes  course:CS101, course:ME201, course:EN100 .
+

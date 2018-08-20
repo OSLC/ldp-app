@@ -1,0 +1,9 @@
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix univ:  <http://university.org/ns/edu#> .
+
+<>
+	a univ:Course ; 
+	univ:name "Introduction to English Literature" ;
+	univ:description  "You should know how to read to take this course" ;
+	univ:credits 2 .
+
