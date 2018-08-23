@@ -37,12 +37,27 @@ curl --request PUT \
  --header 'Content-Type:text/turtle' \
  --data-binary @./727188.ttl
 
+ # this is just for testing, add Jay Jackson with a PUT, but not in a container
+curl --request PUT \
+ --url http://localhost:3000/umaine/temp/727188 \
+ --header 'Content-Type:text/turtle' \
+ --data-binary @./727188.ttl
+
+
  # Create the LDPC for the teachers
  curl --request PUT \
  --url http://localhost:3030/univ/data?graph=http://localhost:3000/univ/umaine/teachers \
  --header 'Content-Type: text/turtle' \
  --data-binary @./teachers.ttl
 
+ # Get information about the /umaine/teachers container
+ curl --request GET \
+ --url http://localhost:3000/univ/umaine/teachers \
+ --header 'Accept: text/turtle' 
+
+ # Delete the /umaine/teachers container
+ curl --request DELETE --url http://localhost:3000/univ/umaine/teachers 
+ 
  # Create the LDPC for the courses
  curl --request PUT \
  --url http://localhost:3030/univ/data?graph=http://localhost:3000/univ/umaine/courses \

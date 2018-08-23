@@ -2,7 +2,7 @@
 @prefix univ:  <http://university.org/ns/edu#> .
 @prefix ldp:  <http://www.w3.org/ns/ldp#> .
 
-<http://localhost:3000/univ/umaine/teschers>
+<http://localhost:3000/univ/umaine/teachers>
   a ldp:DirectContainer;
   ldp:membershipResource <http://localhost:3000/univ/umaine> ;
   ldp:hasMemberRelation univ:teachers .
