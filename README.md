@@ -1,5 +1,8 @@
 # ldp-app
 
+[![Discourse status](https://img.shields.io/discourse/https/meta.discourse.org/status.svg)](https://forum.open-services.net/)
+[![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg)](https://gitter.im/OSLC/chat)
+
 A simple Node.js Express app that uses the ldp-service Express middleware to create a simple LDP server.  The app displays LDP resouces accessed using the ldp-service middleware and displays their content, and a graph visualizing the objects and the relationships between them. Catch it running at
 [http://ldpjs.mybluemix.net](http://ldp-app.mybluemix.net).
 
