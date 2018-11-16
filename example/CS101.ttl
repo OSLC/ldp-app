@@ -1,8 +1,11 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix univ:  <http://university.org/ns/edu#> .
 
-<>
+@base <http://localhost:3000/univ/umaine/courses/> .
+
+<CS101>
 	a univ:Course ; 
-	univ:name "Introduction to Computer Science" ;
-	univ:description  "You will need to start with this course" ;
+	dcterms:title "Introduction to Computer Science" ;
+	dcterms:description  "You will need to start with this course" ;
 	univ:credits 3 .

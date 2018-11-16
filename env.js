@@ -103,8 +103,5 @@ if (process.env.VCAP_SERVICES) {
 	}
 }
 
-// Jena
-exports.storageImpl = 'ldp-service-jena'
-exports.jenaURL = config.jenaURL
-exports.dbName = 'mrm'
+exports.config = config
 

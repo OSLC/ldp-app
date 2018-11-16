@@ -1,8 +1,11 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix univ:  <http://university.org/ns/edu#> .
 
-<>
+@base <http://localhost:3000/univ/umaine/courses/> .
+
+<ME201>
 	a univ:Course ; 
-	univ:name "Partial Differential Equations" ;
-	univ:description  "This is a very hard course" ;
+	dcterms:title "Partial Differential Equations" ;
+	dcterms:description  "This is a very hard course" ;
 	univ:credits 4 .

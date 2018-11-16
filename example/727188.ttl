@@ -1,10 +1,13 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix course:  <http://localhost:3000/umaine/courses/> .
 @prefix univ:  <http://university.org/ns/edu#> .
 
-<>
+@base <http://localhost:3000/univ/umaine/students/> .
+
+<727188>
 	a univ:Student ; 
-	univ:name "Jay Jackson" ;
+	dcterms:title "Jay Jackson" ;
 	univ:age  22 ;
 	univ:takes  course:CS101, course:ME201 .
 
