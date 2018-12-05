@@ -1,14 +1,14 @@
 {
 	"name": "ldp-app",
-	"version": "0.0.4",
+	"version": "1.0.0",
 	"description": "A Node.js example app using ldp-service",
 	"license": "Apache-2.0",
 	"author": "Sam Padgett",
 	"contributors": "Jim Amsden <jamsden@us.ibm.com>",
 	"dependencies": {
-		"express": "~4.16.3",
-		"ldp-service": "~0.0.3",
-		"ldp-service-jena": "../ldp-service-jena"
+		"express": "~4.16.4",
+		"ldp-service": "~1.0.0",
+		"ldp-service-jena": "~1.0.0"
 	},
 	"engines": {
 		"node": "~8.11.1"

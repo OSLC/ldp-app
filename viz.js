@@ -19,9 +19,10 @@
  * force-directed graph (see public/index.html).
  */
 
-module.exports = function(app, db, env) {
+module.exports = function(app, env) {
 	var rdf = require('./vocab/rdf.js');
 	var ldp = require('./vocab/ldp.js');
+	var db = env.storageService;
 
 	app.get('/v', function(req, res, next) {
 

@@ -28,6 +28,7 @@ exports.listenHost = (process.env.VCAP_APP_HOST || process.env.OPENSHIFT_NODEJS_
 // the port on the DEA for communication with the application:
 exports.listenPort = (process.env.VCAP_APP_PORT || process.env.OPENSHIFT_NODEJS_PORT || config.port);
 
+// adds a / on the end of a URL if it doesn't already end in /
 function addSlash(url) {
 	if (url.substr(-1) == '/') {
 		return url;
@@ -36,6 +37,7 @@ function addSlash(url) {
 	}
 }
 
+// removes the default port for http and https
 function toURL(urlObj) {
 	if ((urlObj.scheme === 'http' && urlObj.port === 80) ||
 			(urlObj.scheme === 'https' && urlObj.port === 443)) {
@@ -89,19 +91,9 @@ if (process.env.LDP_BASE) {
 	});
 }
 
-// MongoDB
-//exports.storageImpl = 'ldp-service-mongodb' // the storage implementation to load
-if (process.env.VCAP_SERVICES) {
-	var env = JSON.parse(process.env.VCAP_SERVICES);
-	exports.mongoURL = env['mongodb-2.4'][0].credentials.url;
-} else {
-	if (process.env.OPENSHIFT_MONGODB_DB_URL) {
-		exports.mongoURL = process.env.OPENSHIFT_MONGODB_DB_URL;
-	} else {
-		exports.mongoURL = process.env.MONGO_URL || config.mongoURL;
-		exports.dbName = config.dbName
-	}
-}
+// ldp-service-jena storage service 
 
-exports.config = config
+exports.storageImpl = config.storageImpl;
+exports.jenaURL = config.jenaURL;  // this is storage implementation specific
+
 

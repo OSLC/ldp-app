@@ -20,7 +20,7 @@
  */
 
 var express = require('express')
-var ldpService = require('ldp-service')
+var ldpService = require('ldp-service').ldpService;
 var env = require('./env.js')
 var viz = require('./viz.js')
 
@@ -32,11 +32,20 @@ var app = express()
 app.use(express.static(__dirname + '/public'))
 
 // initialize database and set up LDP services and viz when ready
-app.use(ldpService(env))
-
-// add the visualization middleware to support graph visualization
-viz(app, ldpService.db, env)
-
+env.storageService = require('ldp-service-jena');
+env.storageService.init(env, function(err) {
+	if (err) {
+		// don't add the services that depend on the database if it can't be initialized
+		console.error(err);
+		console.error(`Can't initialize the ${env.storageImple} data service.`);
+	} else {
+		// it will be on a different route (/v) than any LDP route
+		viz(app, env);
+		// add the LDP service
+		app.use(ldpService(env));
+		// add the visualization middleware to support graph visualization,
+	}
+});
 
 // error handling (developer centric)
 app.use(function(err, req, res, next){
@@ -46,4 +55,4 @@ app.use(function(err, req, res, next){
 
 // Start server
 app.listen(env.listenPort, env.listenHost)
-console.log('App started on port ' + env.listenPort)
+console.log('App started on port ' + env.appBase);

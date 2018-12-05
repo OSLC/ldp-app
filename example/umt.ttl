@@ -1,0 +1,18 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix univ:  <http://university.org/ns/edu#> .
+@prefix ldp:  <http://www.w3.org/ns/ldp#> .
+
+@base <http://localhost:3000/univ/> .
+
+# University of Maine
+# The students, courses and teachers will be added using the
+# corresonding LDPCs
+<umt>
+	a univ:University; 
+	dcterms:identifier "umt";
+	dcterms:title "University of Montana"; 
+	dcterms:description  "Learning in the wild" ;
+.
+

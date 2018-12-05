@@ -2,6 +2,45 @@
 #
 # The root LDPC for LDP.js is http://localhost:3000 - everything goes in here.
 #
+# Start the Fuseki server:
+# cd /Users/jamsden/bin/jena-fuseki1-3.8.0
+# ./fuseki-server --config=../config-univ.ttl
+
+# Create the /univ BasicContainer, the root container for the database
+curl --request PUT \
+ --url http://localhost:3030/univ/data?graph=http://localhost:3000/univ \
+ --header 'Content-Type: text/turtle' \
+ --data-binary @./univ.ttl
+
+# Add a new University
+ curl --request POST \
+ --url http://localhost:3000/univ \
+ --header 'Slug:umt' \
+ --header 'Content-Type:text/turtle' \
+ --data-binary @./umt.ttl --verbose
+
+# Get information about the /univ container
+ curl --request GET \
+ --url http://localhost:3000/univ \
+ --header 'Accept: text/turtle' \
+ --header 'Prefer: return=representation; include="http://www.w3.org/ns/ldp#PreferMinimalContainer"'
+
+ # Get the members of the the /umaine/students container, preferring the containment triples
+ curl --request GET \
+ --url http://localhost:3000/univ \
+ --header 'Accept: text/turtle' \
+ --header 'Prefer: return=representation; include="http://www.w3.org/ns/ldp#PreferContainment http://www.w3.org/ns/ldp#PreferMinimalContainer"'
+
+ # Get the members of the the /umaine/students container, preferring the membership triples
+ curl --request GET \
+ --url http://localhost:3000/univ \
+ --header 'Accept: text/turtle' \
+ --header 'Prefer: return=representation; include="http://www.w3.org/ns/ldp#PreferMembership http://www.w3.org/ns/ldp#PreferMinimalContainer"'
+
+
+
+
+
 
 # Start with the umaine LDP-RS and add it to the root LDPC
 #
@@ -149,7 +188,7 @@ curl --request GET \
 
 # Joe Smith 727185 should be added to the umaine students
 curl --request GET \
- --url graph=http://localhost:3000/univ/umaine \
+ --url http://localhost:3000/univ/umaine \
  --header 'Accept: text/turtle' 
 
  # and be a member of the /umaine/students container
