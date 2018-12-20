@@ -37,7 +37,7 @@ env.storageService.init(env, function(err) {
 	if (err) {
 		// don't add the services that depend on the database if it can't be initialized
 		console.error(err);
-		console.error(`Can't initialize the ${env.storageImple} data service.`);
+		console.error(`Can't initialize the ${env.storageImpl} data service.`);
 	} else {
 		// it will be on a different route (/v) than any LDP route
 		viz(app, env);

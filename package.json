@@ -11,7 +11,7 @@
 		"ldp-service-jena": "~1.0.0"
 	},
 	"engines": {
-		"node": "~8.11.1"
+		"node": "~10.6.0"
 	},
 	"scripts": {
 		"start": "node app.js"
