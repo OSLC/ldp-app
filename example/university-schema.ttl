@@ -1,0 +1,153 @@
+@prefix rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl:    <http://www.w3.org/2002/07/owl#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix univ:   <http://university.org/ns/edu#> .
+
+# -------------------------------------------------------
+# University Example RDF Schema
+# Derived from the UML class diagram: University Example.tiff
+# -------------------------------------------------------
+
+univ: a owl:Ontology ;
+    rdfs:label "University Example Ontology" ;
+    rdfs:comment "RDF Schema for the University Example UML model." .
+
+# =======================================================
+# Classes
+# =======================================================
+
+univ:University a rdfs:Class ;
+    rdfs:label "University" ;
+    rdfs:comment "An educational institution that has students, courses and teachers." .
+
+univ:Student a rdfs:Class ;
+    rdfs:label "Student" ;
+    rdfs:comment "A person enrolled at a university." .
+
+univ:Course a rdfs:Class ;
+    rdfs:label "Course" ;
+    rdfs:comment "A course offered by a university." .
+
+univ:Professor a rdfs:Class ;
+    rdfs:label "Professor" ;
+    rdfs:comment "A faculty member who teaches courses at a university." .
+
+univ:Address a rdfs:Class ;
+    rdfs:label "Address" ;
+    rdfs:comment "A postal address." .
+
+# =======================================================
+# University properties
+# =======================================================
+
+univ:name a rdf:Property ;
+    rdfs:label "name" ;
+    rdfs:comment "The name of a university, student, or professor." ;
+    rdfs:range xsd:string .
+
+univ:description a rdf:Property ;
+    rdfs:label "description" ;
+    rdfs:comment "A textual description." ;
+    rdfs:range xsd:string .
+
+univ:students a rdf:Property ;
+    rdfs:label "students" ;
+    rdfs:comment "The students enrolled at a university." ;
+    rdfs:domain univ:University ;
+    rdfs:range univ:Student .
+
+univ:courses a rdf:Property ;
+    rdfs:label "courses" ;
+    rdfs:comment "The courses offered by a university." ;
+    rdfs:domain univ:University ;
+    rdfs:range univ:Course .
+
+univ:professors a rdf:Property ;
+    rdfs:label "professors" ;
+    rdfs:comment "The professors employed by a university." ;
+    rdfs:domain univ:University ;
+    rdfs:range univ:Professor .
+
+# =======================================================
+# Student properties
+# =======================================================
+
+univ:age a rdf:Property ;
+    rdfs:label "age" ;
+    rdfs:comment "The age of a student in years." ;
+    rdfs:domain univ:Student ;
+    rdfs:range xsd:integer .
+
+univ:gpa a rdf:Property ;
+    rdfs:label "gpa" ;
+    rdfs:comment "The grade point average of a student." ;
+    rdfs:domain univ:Student ;
+    rdfs:range xsd:float .
+
+univ:address a rdf:Property ;
+    rdfs:label "address" ;
+    rdfs:comment "The postal address of a student." ;
+    rdfs:domain univ:Student ;
+    rdfs:range univ:Address .
+
+univ:takes a rdf:Property ;
+    rdfs:label "takes" ;
+    rdfs:comment "A course that a student is taking." ;
+    rdfs:domain univ:Student ;
+    rdfs:range univ:Course .
+
+# =======================================================
+# Course properties
+# =======================================================
+
+univ:credits a rdf:Property ;
+    rdfs:label "credits" ;
+    rdfs:comment "The number of credit hours for a course." ;
+    rdfs:domain univ:Course ;
+    rdfs:range xsd:integer .
+
+# =======================================================
+# Professor properties
+# =======================================================
+
+univ:salary a rdf:Property ;
+    rdfs:label "salary" ;
+    rdfs:comment "The salary of a professor." ;
+    rdfs:domain univ:Professor ;
+    rdfs:range xsd:decimal .
+
+univ:teaches a rdf:Property ;
+    rdfs:label "teaches" ;
+    rdfs:comment "A course that a professor teaches." ;
+    rdfs:domain univ:Professor ;
+    rdfs:range univ:Course .
+
+# =======================================================
+# Address properties
+# =======================================================
+
+univ:street a rdf:Property ;
+    rdfs:label "street" ;
+    rdfs:comment "The street address." ;
+    rdfs:domain univ:Address ;
+    rdfs:range xsd:string .
+
+univ:city a rdf:Property ;
+    rdfs:label "city" ;
+    rdfs:comment "The city." ;
+    rdfs:domain univ:Address ;
+    rdfs:range xsd:string .
+
+univ:state a rdf:Property ;
+    rdfs:label "state" ;
+    rdfs:comment "The state or province." ;
+    rdfs:domain univ:Address ;
+    rdfs:range xsd:string .
+
+univ:zip a rdf:Property ;
+    rdfs:label "zip" ;
+    rdfs:comment "The postal or ZIP code." ;
+    rdfs:domain univ:Address ;
+    rdfs:range xsd:string .

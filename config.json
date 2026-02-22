@@ -2,7 +2,7 @@
 	"scheme": "http",
 	"host": "localhost",
 	"port": 3000,
-	"context": "/",
+	"context": "/univ/",
 	"storageImpl": "ldp-service-jena",
 	"jenaURL": "http://localhost:3030/univ/"
 }

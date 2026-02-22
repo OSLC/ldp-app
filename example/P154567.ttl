@@ -6,7 +6,7 @@
 @base <http://localhost:3000/univ/umaine/teachers/> .
 
 <P154567>
-	a univ:Teacher ;
+	a univ:Professor ;
 	dcterms:title "Joe Clark";
 	univ:salary 65000 ;
 	univ:teaches course:CS101, course:ME201 .

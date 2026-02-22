@@ -1,20 +1,30 @@
 {
 	"name": "ldp-app",
-	"version": "1.0.0",
+	"version": "2.0.0",
 	"description": "A Node.js example app using ldp-service",
 	"license": "Apache-2.0",
 	"author": "Sam Padgett",
 	"contributors": "Jim Amsden <jamsden@us.ibm.com>",
+	"type": "module",
+	"main": "dist/app.js",
+	"scripts": {
+		"build": "tsc",
+		"clean": "rm -rf dist",
+		"start": "node dist/app.js"
+	},
 	"dependencies": {
-		"express": "~4.16.4",
-		"ldp-service": "~1.0.0",
-		"ldp-service-jena": "~1.0.0"
+		"express": "^5.0.1",
+		"ldp-service": "*",
+		"ldp-service-jena": "*",
+		"storage-service": "*"
+	},
+	"devDependencies": {
+		"typescript": "^5.7.0",
+		"@types/node": "^22.0.0",
+		"@types/express": "^5.0.0"
 	},
 	"engines": {
-		"node": "~10.6.0"
-	},
-	"scripts": {
-		"start": "node app.js"
+		"node": "^22.11.0"
 	},
 	"repository": {
 		"type": "git",

@@ -3,8 +3,8 @@
 # The root LDPC for LDP.js is http://localhost:3000 - everything goes in here.
 #
 # Start the Fuseki server:
-# cd /Users/jamsden/bin/jena-fuseki1-3.8.0
-# ./fuseki-server --config=../config-univ.ttl
+# cd ~/bin/apache-jena-fuseki1-6.0.0
+# ./fuseki-server --conf=../config-univ.ttl
 
 # Create the /univ BasicContainer, the root container for the database
 curl --request PUT \
@@ -14,26 +14,26 @@ curl --request PUT \
 
 # Add a new University
  curl --request POST \
- --url http://localhost:3000/univ \
+ --url http://localhost:3030/univ \
  --header 'Slug:umt' \
  --header 'Content-Type:text/turtle' \
  --data-binary @./umt.ttl --verbose
 
 # Get information about the /univ container
  curl --request GET \
- --url http://localhost:3000/univ \
+ --url http://localhost:3030/univ \
  --header 'Accept: text/turtle' \
  --header 'Prefer: return=representation; include="http://www.w3.org/ns/ldp#PreferMinimalContainer"'
 
  # Get the members of the the /umaine/students container, preferring the containment triples
  curl --request GET \
- --url http://localhost:3000/univ \
+ --url http://localhost:3030/univ \
  --header 'Accept: text/turtle' \
  --header 'Prefer: return=representation; include="http://www.w3.org/ns/ldp#PreferContainment http://www.w3.org/ns/ldp#PreferMinimalContainer"'
 
  # Get the members of the the /umaine/students container, preferring the membership triples
  curl --request GET \
- --url http://localhost:3000/univ \
+ --url http://localhost:3030/univ \
  --header 'Accept: text/turtle' \
  --header 'Prefer: return=representation; include="http://www.w3.org/ns/ldp#PreferMembership http://www.w3.org/ns/ldp#PreferMinimalContainer"'
 
@@ -45,19 +45,19 @@ curl --request PUT \
 # Start with the umaine LDP-RS and add it to the root LDPC
 #
 curl --request PUT \
- --url http://localhost:3030/univ/data?graph=http://localhost:3000/univ/umaine \
+ --url http://localhost:3000/univ/data?graph=http://localhost:3000/univ/umaine \
  --header 'Content-Type: text/turtle' \
  --data-binary @./umaine.ttl \
  --verbose
 
 # GET the umaine graph that was just created
 curl --request GET \
- --url http://localhost:3030/univ/data?graph=http://localhost:3000/univ/umaine \
+ --url http://localhost:3000/univ/data?graph=http://localhost:3000/univ/umaine \
  --header 'Accept: text/turtle' 
 
 # Create the LDPC to contain the students, this is a new root LDPC
 curl --request PUT \
- --url http://localhost:3030/univ/data?graph=http://localhost:3000/univ/umaine/students \
+ --url http://localhost:3000/univ/data?graph=http://localhost:3000/univ/umaine/students \
  --header 'Content-Type: text/turtle' \
  --data-binary @./students.ttl
 
@@ -77,7 +77,7 @@ curl --request PUT \
 
 # Reset umaine to its original state (doesn't have student 727185)
 curl --request PUT \
- --url http://localhost:3030/univ/data?graph=http://localhost:3000/univ/umaine \
+ --url http://localhost:3000/univ/data?graph=http://localhost:3000/univ/umaine \
  --header 'Content-Type: text/turtle' \
  --data-binary @./umaine.ttl 
 
@@ -128,7 +128,7 @@ curl --request GET \
  
  # Create the LDPC for the teachers
  curl --request PUT \
- --url http://localhost:3030/univ/data?graph=http://localhost:3000/univ/umaine/teachers \
+ --url http://localhost:3000/univ/data?graph=http://localhost:3000/univ/umaine/teachers \
  --header 'Content-Type: text/turtle' \
  --data-binary @./teachers.ttl
 
@@ -142,7 +142,7 @@ curl --request GET \
  
  # Create the LDPC for the courses
  curl --request PUT \
- --url http://localhost:3030/univ/data?graph=http://localhost:3000/univ/umaine/courses \
+ --url http://localhost:3000/univ/data?graph=http://localhost:3000/univ/umaine/courses \
  --header 'Content-Type: text/turtle' \
  --data-binary @./courses.ttl
 

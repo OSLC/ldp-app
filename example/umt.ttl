@@ -6,7 +6,7 @@
 
 @base <http://localhost:3000/univ/> .
 
-# University of Maine
+# University of Montana
 # The students, courses and teachers will be added using the
 # corresonding LDPCs
 <umt>

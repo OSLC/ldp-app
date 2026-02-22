@@ -22,14 +22,85 @@ html {
 body {
 	font-family: "Helvetica Neue",Helvetica,Arial,Verdana,Geneva,sans-serif;
 	color: #333;
+	margin: 1em;
+}
+
+/* ── Explore bar ──────────────────────────────────── */
+
+#explore-bar {
+	margin-bottom: 1em;
+}
+
+#explore-bar .urlInput {
+	width: 40em;
+}
+
+#exploreBtn {
+	padding: 4px 16px;
+	font-size: 14px;
+	cursor: pointer;
+}
+
+/* ── Graph visualization ──────────────────────────── */
+
+#visualization {
+	border: 1px solid #ccc;
+	margin-bottom: 1em;
+	background: #fafafa;
+}
+
+#graph {
+	display: block;
+	width: 100%;
+	height: 500px;
+}
+
+.link {
+	stroke: #999;
+	stroke-opacity: 0.6;
+	stroke-width: 1.5px;
+}
+
+.link-label {
+	fill: #666;
+	font: 9px sans-serif;
+	pointer-events: none;
+	text-anchor: middle;
+}
+
+.node circle {
+	stroke: #fff;
+	stroke-width: 1.5px;
+}
+
+.node text {
+	fill: #000;
+	font: 11px sans-serif;
+	pointer-events: none;
+}
+
+/* ── CRUD panel ───────────────────────────────────── */
+
+#crud-panel {
+	margin-bottom: 1em;
 }
 
 .tabs {
 	margin-bottom: 0.5em;
 }
 
+.tab-link {
+	text-decoration: none;
+	color: #333;
+	padding: 2px 4px;
+}
+
+.tab-link.active {
+	font-weight: bold;
+}
+
 .fixed {
-	font-family:monospace;
+	font-family: monospace;
 	padding: 1em;
 	border: 1px dashed #2f6fab;
 	color: black;
@@ -52,30 +123,14 @@ body {
 	display: block;
 	width: 100%;
 	height: 20em;
- 	-webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    margin-bottom: 0.5em;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	margin-bottom: 0.5em;
 }
 
 .error {
 	color: red;
-}
-
-circle {
-	stroke: #fff;
-	stroke-width: 1.5px;
-}
-
-.link {
-	stroke: #999;
-	stroke-opacity: .6;
-}
-
-text {
-  fill: #000;
-  font: 10px sans-serif;
-  pointer-events: none;
 }
 
 label {
@@ -83,9 +138,9 @@ label {
 }
 
 input[type=checkbox] {
-    vertical-align: middle;
-    position: relative;
-    bottom: 1px;
+	vertical-align: middle;
+	position: relative;
+	bottom: 1px;
 }
 
 blockquote {

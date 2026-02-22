@@ -3,32 +3,87 @@
 [![Discourse status](https://img.shields.io/discourse/https/meta.discourse.org/status.svg)](https://forum.open-services.net/)
 [![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg)](https://gitter.im/OSLC/chat)
 
-A simple Node.js Express app that uses the ldp-service Express middleware to create a simple LDP server.  The app displays LDP resouces accessed using the ldp-service middleware and displays their content, and a graph visualizing the objects and the relationships between them. Catch it running at
-[http://ldpjs.mybluemix.net](http://ldp-app.mybluemix.net).
-
-![ldp-app Screenshot](screenshot.png "ldp-app Screenshot")
+A Node.js Express application that provides a [W3C Linked Data Platform](http://www.w3.org/2012/ldp/) (LDP) server with an interactive RDF graph visualization. It uses the **ldp-service** Express middleware for LDP operations and **Apache Jena Fuseki** as the RDF triple store.
 
 ldp-app uses the ldp-service Express middleware module which supports LDP basic and direct containers. Indirect containers and non-RDF source are not implemented.
 
-Many thanks to Steve Speicher and Sam Padgett for their valuable contribution to LDP and this sample app.
+Many thanks to Steve Speicher, Sam Padgett and Jim Amsden for their valuable contribution to LDP and this sample app.
 
-Module planning, maintenance and issues can be see at at the [ldp-app](https://hub.jazz.net/project/jamsden/ldp-app/overview) IBM Bluemix DevOps Services project.
+## Architecture
 
+ldp-app is built from several modules in the oslc4js workspace:
+
+- **ldp-app** -- Express application entry point, static web UI, and visualization endpoint
+- **ldp-service** -- Express middleware implementing the W3C LDP protocol (GET, PUT, POST, DELETE for Linked Data Platform RDF resources and containers)
+- **ldp-service-jena** -- Storage backend that persists RDF graphs in Apache Jena Fuseki via its Graph Store Protocol and SPARQL endpoints
+- **storage-service** -- Abstract storage interface that implements minimal storage services shared by all backends
+
+### Server
+
+The Express app (`src/app.ts`) serves static files from `public/`, mounts the visualization route, then mounts the LDP middleware:
+
+1. **Static files** -- `public/index.html`, `style.css`, etc.
+2. **Visualization endpoint** (`/v?uri=<resourceURI>`) -- Defined in `src/viz.ts`. Fetches a named graph from Fuseki, parses the Turtle with rdflib, extracts the resource label (`dcterms:title` or `dcterms:identifier`) and all non-literal object references (URIs and blank nodes), and returns JSON.
+3. **LDP middleware** -- Handles all CRUD operations on RDF resources under the configured context path (e.g. `/univ/`).
+
+Configuration is read from `config.json` (scheme, host, port, context path, Fuseki URL) with environment variable overrides.
+
+### Client
+
+The web UI (`public/index.html`) provides two main features:
+
+**RDF Graph Visualization** -- Uses D3.js v7 to render an interactive force-directed graph. The user enters a resource URI and clicks "Explore". The app fetches the resource to get the resource's label and outgoing references, then renders the resource as a labeled node. Clicking any node expands it by fetching its references and adding child nodes and links. Already-expanded nodes are tracked to prevent re-fetching. Nodes are colored by depth and labeled with `dcterms:title`. Links are labeled with the predicate short name and include arrowhead markers.
+
+**CRUD Panel** -- Tabbed interface for direct LDP operations using native `fetch()`:
+
+- **GET** -- Retrieve a resource as Turtle or JSON
+- **PUT** -- Update a resource with new RDF content
+- **POST** -- Create a new resource in a container
+- **DELETE** -- Remove a resource
 
 ## Running
 
-First, install [Node.js](http://nodejs.org). Next, install and start
-[MongoDB](http://docs.mongodb.org/manual/installation/).
+### Prerequisites
 
-Configuration defaults can be found in config.json.
+- [Node.js](http://nodejs.org) v22 or later
+- [Apache Jena Fuseki](https://jena.apache.org/documentation/fuseki2/) running with a dataset configured
 
-To start the app, run these commands
+### Setup
+
+Install dependencies from the workspace root:
 
     $ npm install
-    $ node app.js
 
-Finally, point your browser to
-[http://localhost:3000/](http://localhost:3000/).
+Build the TypeScript source:
+
+    $ cd ldp-app
+    $ npm run build
+
+### Configuration
+
+Edit `config.json` to match your environment:
+
+```json
+{
+  "scheme": "http",
+  "host": "localhost",
+  "port": 3000,
+  "context": "/univ/",
+  "storageImpl": "ldp-service-jena",
+  "jenaURL": "http://localhost:3030/univ/"
+}
+```
+
+- **context** -- The URL path prefix for LDP resources
+- **jenaURL** -- The Fuseki dataset endpoint URL
+
+### Start
+
+Start Fuseki with your dataset, then:
+
+    $ npm start
+
+Point your browser to [http://localhost:3000/](http://localhost:3000/).
 
 ## License
 
