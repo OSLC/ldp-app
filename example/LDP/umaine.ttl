@@ -1,0 +1,18 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix ldp:  <http://www.w3.org/ns/ldp#> .
+
+@prefix univ:  <http://localhost:3000/univ/> .
+@prefix umaine: <http://localhost:3000/univ/umaine/>
+
+# University of Maine
+# The University of Maine, with no students, courses and professors,
+# they will be added later by POSTing to the LDP direct container
+univ:umaine
+	a univ:University; 
+	dcterms:identifier "ume";
+	dcterms:title "University of Maine"; 
+	dcterms:description  "A wonderful place to learn" ;
+.
+

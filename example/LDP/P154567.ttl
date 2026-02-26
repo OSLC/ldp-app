@@ -1,0 +1,10 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix course:  <http://localhost:3000/univ/umaine/courses/> .
+@prefix univ:  <http://localhost:3000/univ/> .
+
+<>
+	a univ:Professor ;
+	dcterms:title "Joe Clark";
+	univ:salary 65000 ;
+	univ:teaches course:CS101, course:ME201 .

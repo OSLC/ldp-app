@@ -24,7 +24,7 @@ curl --request PUT \
  --verbose
 
 
-# Start with the umaine LDP-RS and add it to the root LDPC
+# Start with the umaine
 #
 curl --request PUT \
  --url http://localhost:3030/univ/data?graph=http://localhost:3000/univ/umaine \
@@ -32,45 +32,34 @@ curl --request PUT \
  --data-binary @./umaine.ttl \
  --verbose
 
-# Create the LDPC to contain the students, this is a new root LDPC
-curl --request PUT \
- --url http://localhost:3030/univ/data?graph=http://localhost:3000/univ/umaine/students \
- --header 'Content-Type: text/turtle' \
- --data-binary @./students.ttl
+# Add the students
 
-# add Jay Jackson with a PUT, but not in an LDPC
+# add student Jay Jackson with a PUT
 curl --request PUT \
  --url http://localhost:3030/univ/data?graph=http://localhost:3000/univ/umaine/students/727188 \
  --header 'Content-Type:text/turtle' \
  --data-binary @./727188.ttl
 
 
-# add Fred Johnson with a PUT, but not in an LDPC
+# add student Fred Johnson
 curl --request PUT \
  --url http://localhost:3030/univ/data?graph=http://localhost:3000/univ/umaine/students/727175 \
  --header 'Content-Type:text/turtle' \
  --data-binary @./727175.ttl
 
+# add student Joe Smith
+curl --request PUT \
+ --url http://localhost:3030/univ/data?graph=http://localhost:3000/univ/umaine/students/727175 \
+ --header 'Content-Type:text/turtle' \
+ --data-binary @./727185.ttl
 
- # Create the LDPC for the professors
- curl --request PUT \
- --url http://localhost:3030/univ/data?graph=http://localhost:3000/univ/umaine/professors \
- --header 'Content-Type: text/turtle' \
- --data-binary @./professors.ttl
+# Add the Professors
 
-# add professor Joe Clark with a put, but not in an LDPC
-
+# add professor Joe Clark
 curl --request PUT \
  --url http://localhost:3030/univ/data?graph=http://localhost:3000/univ/umaine/professors/P154567 \
  --header 'Content-Type:text/turtle' \
  --data-binary @./P154567.ttl
-
-
-# Create the LDPC for the courses
- curl --request PUT \
- --url http://localhost:3030/univ/data?graph=http://localhost:3000/univ/umaine/courses \
- --header 'Content-Type: text/turtle' \
- --data-binary @./courses.ttl
 
 # add the courses
 

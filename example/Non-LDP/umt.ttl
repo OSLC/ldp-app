@@ -7,8 +7,6 @@
 @base <http://localhost:3000/univ/> .
 
 # University of Montana
-# The students, courses and teachers will be added using the
-# corresonding LDPCs
 <umt>
 	a univ:University; 
 	dcterms:identifier "umt";

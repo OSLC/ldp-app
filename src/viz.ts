@@ -53,7 +53,17 @@ export function vizRoute(env: AppEnv): express.Router {
       const graph = rdflib.graph();
       rdflib.parse(body, graph, uri, 'text/turtle');
 
-      const node = rdflib.sym(uri);
+      // The graph name may differ from the subject URI by a trailing slash
+      let node = rdflib.sym(uri);
+      let stmts = graph.statementsMatching(node, null, null);
+      if (stmts.length === 0) {
+        const alt = uri.endsWith('/') ? uri.slice(0, -1) : uri + '/';
+        const altNode = rdflib.sym(alt);
+        if (graph.statementsMatching(altNode, null, null).length > 0) {
+          node = altNode;
+          stmts = graph.statementsMatching(node, null, null);
+        }
+      }
 
       // Get label: dcterms:title, dcterms:identifier, or last path segment
       const label =
@@ -63,7 +73,6 @@ export function vizRoute(env: AppEnv): express.Router {
         uri;
 
       // Get all non-literal object references
-      const stmts = graph.statementsMatching(node, null, null);
       const references = stmts
         .filter(
           (s) =>

@@ -1,10 +1,8 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix univ:  <http://university.org/ns/edu#> .
+@prefix univ:  <hhttp://localhost:3000/univ/> .
 
-@base <http://localhost:3000/univ/umaine/courses/> .
-
-<EN100>
+<>
 	a univ:Course ; 
 	dcterms:title "Introduction to English Literature" ;
 	dcterms:description  "You should know how to read to take this course" ;

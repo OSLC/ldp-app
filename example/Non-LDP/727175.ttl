@@ -1,0 +1,15 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix courses:  <http://localhost:3000/univ/umaine/courses/> .
+@prefix univ:  <http://university.org/ns/edu#> .
+@prefix students:  <http://localhost:3000/univ/umaine/students/> .
+
+students:727175
+	a univ:Student ;
+	dcterms:title "Fred Johnson" ;
+	univ:age  33 ;
+	univ:takes  courses:CS101, courses:ME201, courses:EN100 .
+
+
+
+

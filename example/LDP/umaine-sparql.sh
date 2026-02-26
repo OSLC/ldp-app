@@ -27,13 +27,13 @@ curl --request PUT \
 
  # Get the members of the the /umaine/students container, preferring the containment triples
  curl --request GET \
- --url http://localhost:3030/univ \
+ --url http://localhost:3030/univ/students \
  --header 'Accept: text/turtle' \
  --header 'Prefer: return=representation; include="http://www.w3.org/ns/ldp#PreferContainment http://www.w3.org/ns/ldp#PreferMinimalContainer"'
 
- # Get the members of the the /umaine/students container, preferring the membership triples
+ # Get the members of the the /umaine/professors container, preferring the membership triples
  curl --request GET \
- --url http://localhost:3030/univ \
+ --url http://localhost:3030/univ/professors \
  --header 'Accept: text/turtle' \
  --header 'Prefer: return=representation; include="http://www.w3.org/ns/ldp#PreferMembership http://www.w3.org/ns/ldp#PreferMinimalContainer"'
 

@@ -1,0 +1,210 @@
+@prefix rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl:    <http://www.w3.org/2002/07/owl#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ldp:    <http://www.w3.org/ns/ldp#> .
+@prefix univ:   <http://localhost:3000/univ/> .
+
+# -------------------------------------------------------
+# University Example RDF Schema — LDP variant
+#
+# Derived from university-schema.ttl. This variant uses
+# LDP DirectContainers for all multi-valued object
+# properties. Each DirectContainer manages the membership
+# triples on its membershipResource so that POSTing a new
+# member to the container automatically adds the
+# corresponding domain property triple.
+#
+# For example, POSTing a new Student to a University's
+# StudentsContainer automatically adds:
+#   <university> univ:students <newStudent> .
+#
+# Single-valued object properties (univ:address) remain
+# plain properties — there is no collection to manage.
+# -------------------------------------------------------
+
+univ: a owl:Ontology ;
+    rdfs:label "University Example Ontology (LDP)" ;
+    rdfs:comment "RDF Schema for the University Example using LDP DirectContainers for multi-valued object properties." .
+
+# =======================================================
+# Domain Classes
+# =======================================================
+
+univ:University a rdfs:Class ;
+    rdfs:label "University" ;
+    rdfs:comment "An educational institution that has students, courses and professors." .
+
+univ:Student a rdfs:Class ;
+    rdfs:label "Student" ;
+    rdfs:comment "A person enrolled at a university." .
+
+univ:Course a rdfs:Class ;
+    rdfs:label "Course" ;
+    rdfs:comment "A course offered by a university." .
+
+univ:Professor a rdfs:Class ;
+    rdfs:label "Professor" ;
+    rdfs:comment "A faculty member who teaches courses at a university." .
+
+univ:Address a rdfs:Class ;
+    rdfs:label "Address" ;
+    rdfs:comment "A postal address." .
+
+# =======================================================
+# LDP DirectContainer Classes
+#
+# Each container class is a subclass of ldp:DirectContainer
+# that documents the hasMemberRelation it manages. Instances
+# of these containers set ldp:membershipResource to the
+# domain resource that owns the collection.
+#
+# Example instance (students container for UMaine):
+#
+#   <umaine/students>
+#       a univ:StudentsContainer ;
+#       ldp:membershipResource <umaine> ;
+#       ldp:hasMemberRelation univ:students ;
+#       ldp:contains <umaine/students/727175>, ... .
+# =======================================================
+
+univ:StudentsContainer a rdfs:Class ;
+    rdfs:subClassOf ldp:DirectContainer ;
+    rdfs:label "Students Container" ;
+    rdfs:comment "An LDP DirectContainer whose members are Students. Posts to this container add univ:students triples to the membershipResource (a University)." .
+
+univ:CoursesContainer a rdfs:Class ;
+    rdfs:subClassOf ldp:DirectContainer ;
+    rdfs:label "Courses Container" ;
+    rdfs:comment "An LDP DirectContainer whose members are Courses. Posts to this container add univ:courses triples to the membershipResource (a University)." .
+
+univ:ProfessorsContainer a rdfs:Class ;
+    rdfs:subClassOf ldp:DirectContainer ;
+    rdfs:label "Professors Container" ;
+    rdfs:comment "An LDP DirectContainer whose members are Professors. Posts to this container add univ:professors triples to the membershipResource (a University)." .
+
+univ:TakesContainer a rdfs:Class ;
+    rdfs:subClassOf ldp:DirectContainer ;
+    rdfs:label "Takes Container" ;
+    rdfs:comment "An LDP DirectContainer whose members are Courses that a Student takes. Posts to this container add univ:takes triples to the membershipResource (a Student)." .
+
+univ:TeachesContainer a rdfs:Class ;
+    rdfs:subClassOf ldp:DirectContainer ;
+    rdfs:label "Teaches Container" ;
+    rdfs:comment "An LDP DirectContainer whose members are Courses that a Professor teaches. Posts to this container add univ:teaches triples to the membershipResource (a Professor)." .
+
+# =======================================================
+# Domain Properties — multi-valued object properties
+#
+# These are the hasMemberRelation properties managed by
+# the DirectContainers above. Clients should not assert
+# these triples directly — instead, POST to the
+# corresponding container.
+# =======================================================
+
+univ:students a rdf:Property ;
+    rdfs:label "students" ;
+    rdfs:comment "Students enrolled at a university. Managed by a StudentsContainer." ;
+    rdfs:domain univ:University ;
+    rdfs:range univ:Student .
+
+univ:courses a rdf:Property ;
+    rdfs:label "courses" ;
+    rdfs:comment "Courses offered by a university. Managed by a CoursesContainer." ;
+    rdfs:domain univ:University ;
+    rdfs:range univ:Course .
+
+univ:professors a rdf:Property ;
+    rdfs:label "professors" ;
+    rdfs:comment "Professors employed by a university. Managed by a ProfessorsContainer." ;
+    rdfs:domain univ:University ;
+    rdfs:range univ:Professor .
+
+univ:takes a rdf:Property ;
+    rdfs:label "takes" ;
+    rdfs:comment "Courses that a student is taking. Managed by a TakesContainer." ;
+    rdfs:domain univ:Student ;
+    rdfs:range univ:Course .
+
+univ:teaches a rdf:Property ;
+    rdfs:label "teaches" ;
+    rdfs:comment "Courses that a professor teaches. Managed by a TeachesContainer." ;
+    rdfs:domain univ:Professor ;
+    rdfs:range univ:Course .
+
+# =======================================================
+# Domain Properties — single-valued object property
+# =======================================================
+
+univ:address a rdf:Property ;
+    rdfs:label "address" ;
+    rdfs:comment "The postal address of a student. Single-valued, not container-managed." ;
+    rdfs:domain univ:Student ;
+    rdfs:range univ:Address .
+
+# =======================================================
+# Domain Properties — datatype (literal) properties
+# =======================================================
+
+univ:name a rdf:Property ;
+    rdfs:label "name" ;
+    rdfs:comment "The name of a university, student, or professor." ;
+    rdfs:range xsd:string .
+
+univ:description a rdf:Property ;
+    rdfs:label "description" ;
+    rdfs:comment "A textual description." ;
+    rdfs:range xsd:string .
+
+univ:age a rdf:Property ;
+    rdfs:label "age" ;
+    rdfs:comment "The age of a student in years." ;
+    rdfs:domain univ:Student ;
+    rdfs:range xsd:integer .
+
+univ:gpa a rdf:Property ;
+    rdfs:label "gpa" ;
+    rdfs:comment "The grade point average of a student." ;
+    rdfs:domain univ:Student ;
+    rdfs:range xsd:float .
+
+univ:credits a rdf:Property ;
+    rdfs:label "credits" ;
+    rdfs:comment "The number of credit hours for a course." ;
+    rdfs:domain univ:Course ;
+    rdfs:range xsd:integer .
+
+univ:salary a rdf:Property ;
+    rdfs:label "salary" ;
+    rdfs:comment "The salary of a professor." ;
+    rdfs:domain univ:Professor ;
+    rdfs:range xsd:decimal .
+
+# =======================================================
+# Address properties
+# =======================================================
+
+univ:street a rdf:Property ;
+    rdfs:label "street" ;
+    rdfs:comment "The street address." ;
+    rdfs:domain univ:Address ;
+    rdfs:range xsd:string .
+
+univ:city a rdf:Property ;
+    rdfs:label "city" ;
+    rdfs:comment "The city." ;
+    rdfs:domain univ:Address ;
+    rdfs:range xsd:string .
+
+univ:state a rdf:Property ;
+    rdfs:label "state" ;
+    rdfs:comment "The state or province." ;
+    rdfs:domain univ:Address ;
+    rdfs:range xsd:string .
+
+univ:zip a rdf:Property ;
+    rdfs:label "zip" ;
+    rdfs:comment "The postal or ZIP code." ;
+    rdfs:domain univ:Address ;
+    rdfs:range xsd:string .

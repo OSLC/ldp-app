@@ -1,0 +1,11 @@
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix ldp:  <http://www.w3.org/ns/ldp#> .
+@prefix univ:  <http://localhost:3000/univ/> .
+@prefix umaine: <http://localhost:3000/univ/umaine/>
+
+# Students
+umaine:students
+  a ldp:DirectContainer;
+  ldp:membershipResource univ:umaine ;
+  ldp:hasMemberRelation umaine:students .
+  

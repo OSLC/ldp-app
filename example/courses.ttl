@@ -1,9 +1,0 @@
-@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix ldp:  <http://www.w3.org/ns/ldp#> .
-@prefix univ:  <http://university.org/ns/edu#> .
-
-<http://localhost:3000/univ/umaine/courses>
-  a ldp:DirectContainer;
-  ldp:membershipResource <http://localhost:3000/univ/umaine> ;
-  ldp:hasMemberRelation univ:courses .
-

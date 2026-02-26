@@ -20,7 +20,7 @@ univ: a owl:Ontology ;
 
 univ:University a rdfs:Class ;
     rdfs:label "University" ;
-    rdfs:comment "An educational institution that has students, courses and teachers." .
+    rdfs:comment "An educational institution that has students, courses and professors." .
 
 univ:Student a rdfs:Class ;
     rdfs:label "Student" ;

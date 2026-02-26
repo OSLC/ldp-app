@@ -1,0 +1,23 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix univ:  <http://university.org/ns/edu#> .
+@prefix ldp:  <http://www.w3.org/ns/ldp#> .
+@prefix umaine:  <http://localhost:3000/univ/umaine/> .
+@prefix courses:  <http://localhost:3000/univ/umaine/courses/> .
+@prefix professors:  <http://localhost:3000/univ/umaine/professors/> .
+@prefix students:  <http://localhost:3000/univ/umaine/students/> .
+
+
+# University of Maine
+# The University of Maine, with some students, courses and professors
+umaine:
+	a univ:University; 
+	dcterms:identifier "ume";
+	dcterms:title "University of Maine"; 
+	dcterms:description  "A wonderful place to learn" ;
+	univ:students students:727175, students:727188, students:727185 ;
+  	univ:courses courses:CS101, courses:EN100, courses:ME201 ;
+  	univ:professors professors:P154567 ;
+.
+
