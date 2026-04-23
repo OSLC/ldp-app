@@ -27,7 +27,7 @@ Edit `config.json` to match your environment:
   "host": "localhost",
   "port": 3000,
   "context": "/univ/",
-  "storageImpl": "ldp-service-jena",
+  "storageImpl": "jena-storage-service",
   "jenaURL": "http://localhost:3030/univ/"
 }
 ```
